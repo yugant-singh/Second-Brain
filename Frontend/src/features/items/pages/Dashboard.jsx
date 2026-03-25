@@ -29,7 +29,7 @@ const Dashboard = () => {
             <div className="dashboard-loading">Loading...</div>
           ) : items.length === 0 ? (
             <div className="dashboard-empty">
-              <p>Koi item nahi hai abhi — pehla item save karo! 🚀</p>
+              <p>There are no items right now — save your first item!</p>
             </div>
           ) : (
             <div className="items-grid">

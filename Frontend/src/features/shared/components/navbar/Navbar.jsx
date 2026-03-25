@@ -1,25 +1,21 @@
-import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from "../../../auth/hooks/useAuth"
+import { NavLink } from "react-router-dom"
 import "./Navbar.scss"
 
 const Navbar = () => {
-  const { user, logoutHandler } = useAuth()
-  const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    await logoutHandler()
-    navigate("/login")
-  }
-
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-logo">MindVault</Link>
+      <div className="navbar-logo">MindVault</div>
 
-      <div className="navbar-right">
-        <span className="navbar-user">👤 {user?.name}</span>
-        <button className="navbar-logout" onClick={handleLogout}>
-          Logout
-        </button>
+      <div className="navbar-links">
+        <NavLink to="/dashboard" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Dashboard
+        </NavLink>
+        <NavLink to="/graph" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Graph View
+        </NavLink>
+        <NavLink to="/search" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          Search
+        </NavLink>
       </div>
     </nav>
   )

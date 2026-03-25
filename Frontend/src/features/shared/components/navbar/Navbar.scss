@@ -20,28 +20,26 @@
   letter-spacing: 2px;
 }
 
-.navbar-right {
+.navbar-links {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 4px;
 }
 
-.navbar-user {
+.nav-link {
   font-size: 13px;
-  color: $text-secondary;
-}
-
-.navbar-logout {
-  background: transparent;
-  border: 1px solid $border;
   color: $text-secondary;
   padding: 6px 14px;
   border-radius: $radius-sm;
-  font-size: 12px;
   transition: all 0.2s;
 
   &:hover {
-    border-color: #ff6b6b;
-    color: #ff6b6b;
+    color: $text-primary;
+    background: $cyan-glow;
+  }
+
+  &.active {
+    color: $cyan;
+    background: $cyan-glow;
   }
 }

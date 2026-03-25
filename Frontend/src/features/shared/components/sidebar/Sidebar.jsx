@@ -1,25 +1,20 @@
-import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../../auth/hooks/useAuth.js"
+import { useCollections } from "../../../collections/hooks/useCollections.js"
 import "./Sidebar.scss"
 
-const Sidebar = ({ collections = [] }) => {
+const Sidebar = () => {
+  const { user, logoutHandler } = useAuth()
+  const { collections } = useCollections()
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await logoutHandler()
+    navigate("/login")
+  }
+
   return (
     <aside className="sidebar">
-      <nav className="sidebar-nav">
-        <NavLink to="/dashboard" end className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
-          <span className="nav-icon">⊞</span>
-          Dashboard
-        </NavLink>
-
-        <NavLink to="/graph" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
-          <span className="nav-icon">◎</span>
-          Graph View
-        </NavLink>
-
-        <NavLink to="/search" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
-          <span className="nav-icon">⊙</span>
-          Search
-        </NavLink>
-      </nav>
 
       <div className="sidebar-section">
         <span className="sidebar-label">Collections</span>
@@ -34,6 +29,22 @@ const Sidebar = ({ collections = [] }) => {
           ))
         )}
       </div>
+
+      <div className="sidebar-footer">
+        <div className="sidebar-user">
+          <div className="user-avatar">
+            {user?.name?.charAt(0).toUpperCase()}
+          </div>
+          <div className="user-info">
+            <span className="user-name">{user?.name}</span>
+            <span className="user-email">{user?.email}</span>
+          </div>
+        </div>
+        <button className="sidebar-logout" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+
     </aside>
   )
 }

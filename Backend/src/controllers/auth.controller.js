@@ -1,6 +1,7 @@
 import userModel from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { redis } from '../config/cache.js';
 
 
 
@@ -89,3 +90,14 @@ export async function getMeController(req, res) {
     res.status(500).json({ message: "Server error", error: err.message })
   }
 }
+
+export async function logOutController(req,res){
+  const token  = req.cookies.token
+  res.clearCookie("token")
+
+  await redis.set(token,Date.now().toString())
+  return res.status(200).json({
+        message:"token blackListed successfully"
+    })
+}
+

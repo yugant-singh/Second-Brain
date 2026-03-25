@@ -1,0 +1,96 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.graph-page {
+  min-height: 100vh;
+  background: $bg-primary;
+}
+
+.graph-body {
+  display: flex;
+}
+
+.graph-main {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - $topbar-height);
+}
+
+.graph-header {
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: $text-primary;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 13px;
+    color: $text-muted;
+  }
+}
+
+.graph-container {
+  flex: 1;
+  @include glass-card;
+  position: relative;
+  overflow: hidden;
+}
+
+.graph-loading {
+  @include flex-center;
+  height: 400px;
+  color: $text-muted;
+  font-size: 14px;
+}
+
+.graph-tooltip {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  @include glass-card;
+  padding: 16px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  button {
+    background: transparent;
+    color: $text-muted;
+    font-size: 12px;
+    align-self: flex-end;
+    padding: 2px 6px;
+  }
+}
+
+.tooltip-type {
+  font-size: 10px;
+  color: $cyan;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tooltip-title {
+  font-size: 14px;
+  color: $text-primary;
+  font-weight: 500;
+}
+
+.tooltip-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tooltip-tag {
+  font-size: 10px;
+  background: $cyan-glow;
+  color: $cyan-muted;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid $cyan-border;
+}
