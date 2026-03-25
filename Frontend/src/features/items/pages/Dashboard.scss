@@ -1,0 +1,58 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.dashboard {
+  min-height: 100vh;
+  background: $bg-primary;
+}
+
+.dashboard-body {
+  display: flex;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-header {
+  @include flex-between;
+
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+}
+
+.save-btn {
+  background: $cyan-glow;
+  border: 1px solid $cyan-border;
+  color: $cyan;
+  padding: 8px 18px;
+  border-radius: $radius-sm;
+  font-size: 13px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: $cyan;
+  }
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-loading,
+.dashboard-empty {
+  @include flex-center;
+  height: 300px;
+  color: $text-muted;
+  font-size: 14px;
+}

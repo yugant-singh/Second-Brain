@@ -40,4 +40,6 @@ export function useAuth() {
     }
 
 
+    return {registerHandler,loginHandler,loading,user}
+
 }

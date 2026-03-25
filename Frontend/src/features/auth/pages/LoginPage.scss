@@ -1,0 +1,133 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.auth-page {
+  min-height: 100vh;
+  background: $bg-primary;
+  @include flex-center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: $cyan;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: twinkle 3s infinite;
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.8; }
+  }
+}
+
+.auth-card {
+  @include glass-card;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  z-index: 1;
+  text-align: center;
+}
+
+.auth-logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: $cyan;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  font-size: 13px;
+  color: $text-muted;
+  margin-bottom: 32px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.auth-error {
+  background: rgba(255, 50, 50, 0.1);
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  color: #ff6b6b;
+  padding: 10px 14px;
+  border-radius: $radius-sm;
+  font-size: 13px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    color: $text-secondary;
+    letter-spacing: 0.5px;
+  }
+
+  input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 10px 14px;
+    color: $text-primary;
+    font-size: 14px;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: $cyan-muted;
+    }
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+}
+
+.auth-btn {
+  background: $cyan-glow;
+  border: 1px solid $cyan-border;
+  color: $cyan;
+  padding: 12px;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 8px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: $cyan;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.auth-switch {
+  margin-top: 20px;
+  font-size: 13px;
+  color: $text-muted;
+
+  a {
+    color: $cyan;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

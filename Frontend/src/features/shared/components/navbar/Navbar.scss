@@ -1,0 +1,47 @@
+@use '../../../shared/styles/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.navbar {
+  height: $topbar-height;
+  background: rgba(4, 4, 15, 0.8);
+  border-bottom: 1px solid $border;
+  padding: 0 24px;
+  @include flex-between;
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: $cyan;
+  letter-spacing: 2px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-user {
+  font-size: 13px;
+  color: $text-secondary;
+}
+
+.navbar-logout {
+  background: transparent;
+  border: 1px solid $border;
+  color: $text-secondary;
+  padding: 6px 14px;
+  border-radius: $radius-sm;
+  font-size: 12px;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+  }
+}
