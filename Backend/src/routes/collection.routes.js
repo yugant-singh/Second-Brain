@@ -9,7 +9,7 @@ import {
 } from '../controllers/collection.controller.js'
 
 collectionRouter.post('/',authMiddleware,createCollectionController)
-collectionRouter.get('/',authMiddleware,getAllCollection),
+collectionRouter.get('/',authMiddleware,getAllCollection)
 collectionRouter.delete('/:id',authMiddleware,deleteCollection)
 collectionRouter.post('/:id/add-item',authMiddleware,addItemToCollection)
 

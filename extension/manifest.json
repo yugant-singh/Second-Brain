@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "MindVault Saver",
+  "version": "1.0",
+  "description": "Save any webpage to MindVault",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Save to MindVault"
+  },
+  "permissions": [
+  "activeTab",
+  "storage"
+]
+}

@@ -163,3 +163,122 @@
     color: #ff6b6b;
   }
 }
+
+.sidebar-section-header {
+  @include flex-between;
+  padding: 0 12px;
+  margin-bottom: 8px;
+}
+
+.new-col-btn {
+  background: transparent;
+  border: 1px solid $border;
+  color: $cyan;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  @include flex-center;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $cyan-glow;
+    border-color: $cyan-border;
+  }
+}
+
+.new-col-form {
+  display: flex;
+  gap: 6px;
+  padding: 0 8px;
+  margin-bottom: 8px;
+
+  input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 6px 10px;
+    color: $text-primary;
+    font-size: 12px;
+
+    &:focus {
+      border-color: $cyan-muted;
+    }
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+
+  button {
+    background: $cyan-glow;
+    border: 1px solid $cyan-border;
+    color: $cyan;
+    padding: 6px 10px;
+    border-radius: $radius-sm;
+    font-size: 12px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(0, 212, 255, 0.2);
+    }
+  }
+}
+
+.collection-select {
+  display: flex;
+  gap: 10px;
+
+  select {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 8px 12px;
+    color: $text-primary;
+    font-size: 13px;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: $cyan-muted;
+    }
+
+    option {
+      background: #0a0a1a;
+    }
+  }
+
+  button {
+    background: $cyan-glow;
+    border: 1px solid $cyan-border;
+    color: $cyan;
+    padding: 8px 16px;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(0, 212, 255, 0.2);
+      border-color: $cyan;
+    }
+  }
+}
+
+.col-msg {
+  font-size: 12px;
+  color: $green;
+  margin-top: 6px;
+}
+
+@include mobile {
+  .sidebar {
+    width: 280px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    background: #04040f;
+  }
+}

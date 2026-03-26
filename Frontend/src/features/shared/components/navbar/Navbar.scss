@@ -13,6 +13,12 @@
   z-index: 100;
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .navbar-logo {
   font-size: 18px;
   font-weight: 700;
@@ -20,10 +26,34 @@
   letter-spacing: 2px;
 }
 
+.hamburger {
+  display: none;
+  background: transparent;
+  border: 1px solid $border;
+  color: $text-secondary;
+  padding: 4px 8px;
+  border-radius: $radius-sm;
+  font-size: 16px;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: $cyan-border;
+    color: $cyan;
+  }
+
+  @include mobile {
+    display: block;
+  }
+}
+
 .navbar-links {
   display: flex;
   align-items: center;
   gap: 4px;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .nav-link {
@@ -41,5 +71,17 @@
   &.active {
     color: $cyan;
     background: $cyan-glow;
+  }
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+  display: none;
+
+  @include mobile {
+    display: block;
   }
 }

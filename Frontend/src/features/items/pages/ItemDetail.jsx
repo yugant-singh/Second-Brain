@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import Navbar from "../../shared/components/navbar/Navbar.jsx"
+import Navbar from "../../shared/components/Navbar/Navbar.jsx"
 import Sidebar from "../../shared/components/Sidebar/Sidebar.jsx"
 import { useItems } from "../hooks/useItems.js"
+import { useCollections } from "../../collections/hooks/useCollections.js"
 import "./ItemDetail.scss"
 
 const ItemDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { getItemById, deleteItem } = useItems()
+  const { collections, addItemToCollection } = useCollections()
   const [item, setItem] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedCol, setSelectedCol] = useState("")
+  const [colMsg, setColMsg] = useState("")
 
   useEffect(() => {
     const fetchItem = async () => {
       const result = await getItemById(id)
       if (result.data) {
         setItem(result.data)
+        setSelectedCol(result.data.collectionId || "")
       }
       setLoading(false)
     }
@@ -26,6 +31,15 @@ const ItemDetail = () => {
   const handleDelete = async () => {
     await deleteItem(id)
     navigate("/dashboard")
+  }
+
+  const handleAddToCollection = async () => {
+    if (!selectedCol) return
+    const result = await addItemToCollection(selectedCol, id)
+    if (result.success) {
+      setColMsg("added to the collectinos ✅")
+      setTimeout(() => setColMsg(""), 2000)
+    }
   }
 
   if (loading) return (
@@ -95,6 +109,24 @@ const ItemDetail = () => {
                 ))}
               </div>
             </div>
+
+            <div className="detail-section">
+              <h3>Add to Collection</h3>
+              <div className="collection-select">
+                <select
+                  value={selectedCol}
+                  onChange={(e) => setSelectedCol(e.target.value)}
+                >
+                  <option value=""> select Collection</option>
+                  {collections.map((col) => (
+                    <option key={col._id} value={col._id}>{col.name}</option>
+                  ))}
+                </select>
+                <button onClick={handleAddToCollection}>Add</button>
+              </div>
+              {colMsg && <p className="col-msg">{colMsg}</p>}
+            </div>
+
           </div>
 
         </main>

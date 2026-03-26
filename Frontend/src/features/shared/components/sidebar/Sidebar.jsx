@@ -1,31 +1,69 @@
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../auth/hooks/useAuth.js"
 import { useCollections } from "../../../collections/hooks/useCollections.js"
 import "./Sidebar.scss"
 
-const Sidebar = () => {
+const Sidebar = ({ onClose = () => {} }) => {
   const { user, logoutHandler } = useAuth()
-  const { collections } = useCollections()
+  const { collections, createCollection } = useCollections()
   const navigate = useNavigate()
+  const [showInput, setShowInput] = useState(false)
+  const [newColName, setNewColName] = useState("")
 
   const handleLogout = async () => {
     await logoutHandler()
     navigate("/login")
+    onClose()
+  }
+
+  const handleCreateCollection = async (e) => {
+    e.preventDefault()
+    if (!newColName.trim()) return
+    await createCollection({ name: newColName })
+    setNewColName("")
+    setShowInput(false)
   }
 
   return (
     <aside className="sidebar">
 
       <div className="sidebar-section">
-        <span className="sidebar-label">Collections</span>
+        <div className="sidebar-section-header">
+          <span className="sidebar-label">Collections</span>
+          <button className="new-col-btn" onClick={() => setShowInput(!showInput)}>
+            +
+          </button>
+        </div>
+
+        {showInput && (
+          <form onSubmit={handleCreateCollection} className="new-col-form">
+            <input
+              type="text"
+              placeholder="Collection name..."
+              value={newColName}
+              onChange={(e) => setNewColName(e.target.value)}
+              autoFocus
+            />
+            <button type="submit">Save</button>
+          </form>
+        )}
+
         {collections.length === 0 ? (
           <p className="sidebar-empty">No collections yet</p>
         ) : (
           collections.map((col) => (
-            <div key={col._id} className="sidebar-collection">
+            <NavLink
+              to={`/collections/${col._id}`}
+              key={col._id}
+              onClick={onClose}
+              className={({ isActive }) =>
+                isActive ? "sidebar-collection active" : "sidebar-collection"
+              }
+            >
               <span className="collection-dot" />
               {col.name}
-            </div>
+            </NavLink>
           ))
         )}
       </div>
