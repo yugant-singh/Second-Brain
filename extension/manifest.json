@@ -8,7 +8,8 @@
     "default_title": "Save to MindVault"
   },
   "permissions": [
-  "activeTab",
-  "storage"
-]
+    "activeTab",
+    "storage",
+    "tabs"
+  ]
 }

@@ -5,4 +5,5 @@ const api = axios.create({
   withCredentials: true,
 })
 
-export const searchItemsAPI = (query) => api.post("/search", { query })
+export const searchItemsAPI = (query, type, sortBy) =>
+  api.post("/search", { query, type, sortBy })

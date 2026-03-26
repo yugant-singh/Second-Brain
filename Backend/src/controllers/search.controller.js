@@ -10,24 +10,38 @@ const cosineSimilarity = (vecA, vecB) => {
 
 export const searchItems = async (req, res) => {
   try {
-    const { query } = req.body;
+    const { query, type, sortBy } = req.body;
 
     const queryEmbedding = await generateEmbedding(query);
 
-    const items = await itemModel.find({ userId: req.user.id });
+    // Type filter apply karo
+    const filter = { userId: req.user.id };
+    if (type && type !== "all") {
+      filter.type = type;
+    }
 
-    const scored = items
+    const items = await itemModel.find(filter);
+
+    let results = items
       .filter((item) => item.embedding && item.embedding.length > 0)
       .map((item) => ({
         ...item._doc,
         score: cosineSimilarity(queryEmbedding, item.embedding),
       }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 10);
+
+    // Sort apply karo
+    if (sortBy === "date") {
+      results = results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      results = results.filter((item) => item.score > 0.3)
+    } else {
+      results = results.sort((a, b) => b.score - a.score)
+    }
+
+    results = results.slice(0, 10)
 
     res.status(200).json({
       message: "Search results",
-      results: scored,
+      results,
     });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });

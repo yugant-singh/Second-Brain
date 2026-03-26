@@ -5,10 +5,10 @@ export function useSearch() {
   const [results, setResults] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const searchItems = async (query) => {
+  const searchItems = async (query, type, sortBy) => {
     try {
       setLoading(true)
-      const res = await searchItemsAPI(query)
+      const res = await searchItemsAPI(query, type, sortBy)
       setResults(res.data.results)
     } catch (err) {
       console.log(err)

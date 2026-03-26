@@ -1,0 +1,272 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.landing {
+  min-height: 100vh;
+  background: $bg-primary;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.stars-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Navbar
+.landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  @include flex-between;
+  padding: 16px 48px;
+  background: rgba(4, 4, 15, 0.8);
+  border-bottom: 1px solid $border;
+  backdrop-filter: blur(10px);
+
+  @include mobile {
+    padding: 16px 20px;
+  }
+}
+
+.landing-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: $cyan;
+  letter-spacing: 2px;
+}
+
+.landing-nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+// Buttons
+.btn-primary {
+  background: $cyan;
+  color: #04040f;
+  padding: 8px 20px;
+  border-radius: $radius-sm;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: none;
+
+  &:hover {
+    background: rgba(0, 212, 255, 0.8);
+  }
+
+  &.btn-lg {
+    padding: 12px 28px;
+    font-size: 15px;
+    border-radius: $radius-md;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $cyan;
+  padding: 8px 20px;
+  border-radius: $radius-sm;
+  font-size: 13px;
+  border: 1px solid $cyan-border;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $cyan-glow;
+    border-color: $cyan;
+  }
+
+  &.btn-lg {
+    padding: 12px 28px;
+    font-size: 15px;
+    border-radius: $radius-md;
+  }
+}
+
+// Hero
+.hero {
+  position: relative;
+  z-index: 1;
+  @include flex-center;
+  flex-direction: column;
+  text-align: center;
+  padding: 100px 24px 80px;
+  gap: 20px;
+
+  @include mobile {
+    padding: 60px 20px 60px;
+  }
+}
+
+.hero-badge {
+  background: $cyan-glow;
+  border: 1px solid $cyan-border;
+  color: $cyan;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.hero-title {
+  font-size: 56px;
+  font-weight: 700;
+  color: $text-primary;
+  line-height: 1.2;
+
+  @include mobile {
+    font-size: 32px;
+  }
+}
+
+.hero-highlight {
+  color: $cyan;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: $text-secondary;
+  max-width: 540px;
+  line-height: 1.6;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+.typing-demo {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  padding: 14px 24px;
+  font-size: 15px;
+  color: $text-secondary;
+}
+
+.typing-label {
+  color: $text-muted;
+}
+
+.typing-text {
+  color: $cyan;
+}
+
+.typing-cursor {
+  color: $cyan;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1 }
+  50% { opacity: 0 }
+}
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+
+  @include mobile {
+    flex-direction: column;
+    width: 100%;
+
+    a {
+      text-align: center;
+    }
+  }
+}
+
+// Features
+.features {
+  position: relative;
+  z-index: 1;
+  padding: 80px 48px;
+  text-align: center;
+
+  @include mobile {
+    padding: 60px 20px;
+  }
+}
+
+.features-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: 8px;
+
+  @include mobile {
+    font-size: 24px;
+  }
+}
+
+.features-subtitle {
+  font-size: 15px;
+  color: $text-muted;
+  margin-bottom: 48px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  @include glass-card;
+  @include cyan-glow-hover;
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  p {
+    font-size: 13px;
+    color: $text-secondary;
+    line-height: 1.5;
+  }
+}
+
+.feature-icon {
+  font-size: 24px;
+}
+
+// CTA
+.cta {
+  position: relative;
+  z-index: 1;
+  @include flex-center;
+  flex-direction: column;
+  gap: 24px;
+  padding: 80px 24px;
+  text-align: center;
+  border-top: 1px solid $border;
+
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: $text-primary;
+
+    @include mobile {
+      font-size: 22px;
+    }
+  }
+}

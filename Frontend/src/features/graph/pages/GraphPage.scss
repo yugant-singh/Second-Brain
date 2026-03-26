@@ -94,3 +94,19 @@
   border-radius: 20px;
   border: 1px solid $cyan-border;
 }
+
+
+
+
+
+
+@include mobile {
+  .graph-main {
+    padding: 16px;
+    height: calc(100vh - $topbar-height - 80px);
+  }
+
+  .graph-header h1 {
+    font-size: 16px;
+  }
+}

@@ -271,14 +271,21 @@
   margin-top: 6px;
 }
 
+
 @include mobile {
   .sidebar {
-    width: 280px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 300;
-    background: #04040f;
+    display: none;
+  }
+}
+
+.sidebar-nav-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+  margin-bottom: 8px;
+
+  @include mobile {
+    display: flex;
   }
 }

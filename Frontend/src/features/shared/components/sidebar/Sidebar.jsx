@@ -28,6 +28,17 @@ const Sidebar = ({ onClose = () => {} }) => {
   return (
     <aside className="sidebar">
 
+<nav className="sidebar-nav-mobile">
+  <NavLink to="/" end onClick={onClose} className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
+    Dashboard
+  </NavLink>
+  <NavLink to="/graph" onClick={onClose} className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
+    Graph View
+  </NavLink>
+  <NavLink to="/search" onClick={onClose} className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
+    Search
+  </NavLink>
+</nav>
       <div className="sidebar-section">
         <div className="sidebar-section-header">
           <span className="sidebar-label">Collections</span>
