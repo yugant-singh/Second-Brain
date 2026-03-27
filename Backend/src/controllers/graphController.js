@@ -2,7 +2,7 @@ import itemModel from "../models/item.model.js";
 
 export const getGraphData = async (req, res) => {
   try {
-    const items = await itemModel.find({ userId: req.user.id });
+   const items = await itemModel.find({ userId: req.user.id }).select("-embedding");
 
 
     const nodes = items.map((item) => ({

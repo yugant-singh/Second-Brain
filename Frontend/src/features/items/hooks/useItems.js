@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { saveItemAPI, getItemsAPI, deleteItemAPI ,getItemByIdAPI} from "../services/item.api.js"
+import { saveItemAPI, getItemsAPI, deleteItemAPI ,getItemByIdAPI,getResurfacedItemsAPI} from "../services/item.api.js"
 
 export function useItems() {
   const [items, setItems] = useState([])
@@ -40,14 +40,22 @@ export function useItems() {
       return { error: err.response?.data?.message || "Something went wrong" }
     }
   }
-  const getItemById = async (id) => {
+ const getItemById = async (id) => {
   try {
     const res = await getItemByIdAPI(id)
-    return { data: res.data.item }
+    return { data: res.data.item, related: res.data.related }
+  } catch (err) {
+    return { error: err.response?.data?.message || "Something went wrong" }
+  }
+}
+const getResurfacedItems = async () => {
+  try {
+    const res = await getResurfacedItemsAPI()
+    return { data: res.data.items }
   } catch (err) {
     return { error: err.response?.data?.message || "Something went wrong" }
   }
 }
 
-  return { items, loading, saveItem, deleteItem, fetchItems,getItemById }
+  return { items, loading, saveItem, deleteItem, fetchItems,getItemById,getResurfacedItems }
 }

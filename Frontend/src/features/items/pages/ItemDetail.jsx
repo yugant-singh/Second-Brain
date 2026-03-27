@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import Navbar from "../../shared/components/Navbar/Navbar.jsx"
 import Sidebar from "../../shared/components/Sidebar/Sidebar.jsx"
+import ItemCard from "../components/ItemCard/ItemCard.jsx"
 import { useItems } from "../hooks/useItems.js"
 import { useCollections } from "../../collections/hooks/useCollections.js"
 import "./ItemDetail.scss"
@@ -12,6 +13,7 @@ const ItemDetail = () => {
   const { getItemById, deleteItem } = useItems()
   const { collections, addItemToCollection } = useCollections()
   const [item, setItem] = useState(null)
+  const [related, setRelated] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedCol, setSelectedCol] = useState("")
   const [colMsg, setColMsg] = useState("")
@@ -21,6 +23,7 @@ const ItemDetail = () => {
       const result = await getItemById(id)
       if (result.data) {
         setItem(result.data)
+        setRelated(result.related || [])
         setSelectedCol(result.data.collectionId || "")
       }
       setLoading(false)
@@ -37,7 +40,7 @@ const ItemDetail = () => {
     if (!selectedCol) return
     const result = await addItemToCollection(selectedCol, id)
     if (result.success) {
-      setColMsg("added to the collectinos ✅")
+      setColMsg("Added to collection! ✅")
       setTimeout(() => setColMsg(""), 2000)
     }
   }
@@ -117,7 +120,7 @@ const ItemDetail = () => {
                   value={selectedCol}
                   onChange={(e) => setSelectedCol(e.target.value)}
                 >
-                  <option value=""> select Collection</option>
+                  <option value="">Select collection</option>
                   {collections.map((col) => (
                     <option key={col._id} value={col._id}>{col.name}</option>
                   ))}
@@ -126,8 +129,18 @@ const ItemDetail = () => {
               </div>
               {colMsg && <p className="col-msg">{colMsg}</p>}
             </div>
-
           </div>
+
+          {related.length > 0 && (
+            <div className="related-section">
+              <h3 className="related-title">Related Items</h3>
+              <div className="related-grid">
+                {related.map((relItem) => (
+                  <ItemCard key={relItem._id} item={relItem} />
+                ))}
+              </div>
+            </div>
+          )}
 
         </main>
       </div>

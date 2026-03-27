@@ -8,6 +8,11 @@
 
 .detail-body {
   display: flex;
+
+  // 🔧 mobile fix: sidebar + content stack vertically
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .detail-main {
@@ -16,6 +21,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include mobile {
+    padding: 16px;
+  }
 }
 
 .detail-header {
@@ -58,11 +67,21 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: visible
+
+  @include mobile {
+    padding: 16px;
+  }
 }
 
 .detail-meta {
   @include flex-between;
+
+  // mobile me date niche aa jayegi
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 }
 
 .detail-type {
@@ -82,6 +101,10 @@
   font-weight: 500;
   color: $text-primary;
   line-height: 1.4;
+
+  @include mobile {
+    font-size: 18px;
+  }
 }
 
 .detail-url {
@@ -104,7 +127,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-    min-width: 0; 
 
   h3 {
     font-size: 12px;
@@ -135,50 +157,90 @@
   }
 }
 
+.collection-select {
+  display: flex;
+  gap: 10px;
+  width: 70%;
+
+  select {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 8px 12px;
+    color: $text-primary;
+    font-size: 13px;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: $cyan-muted;
+    }
+
+    option {
+      background: #0a0a1a;
+    }
+  }
+
+  button {
+    background: $cyan-glow;
+    border: 1px solid $cyan-border;
+    color: $cyan;
+    padding: 8px 16px;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(0, 212, 255, 0.2);
+      border-color: $cyan;
+    }
+  }
+
+  // 🔧 mobile fix: select + button vertical
+  @include mobile {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.col-msg {
+  font-size: 12px;
+  color: $green;
+  margin-top: 6px;
+}
+
 .detail-loading {
   @include flex-center;
   height: 400px;
   color: $text-muted;
   font-size: 14px;
 }
-@include mobile {
-  .detail-body {
-    flex-direction: column;
-  }
 
-  .detail-main {
-    padding: 16px;
-  }
-
-  .detail-card {
-    padding: 16px;
-  }
-
-  .detail-title {
-    font-size: 18px;
-  }
+.related-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
+.related-title {
+  font-size: 12px;
+  color: $text-muted;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
 
-@include mobile {
-  .detail-main {
-    padding: 16px;
-  }
-
-  .detail-title {
-    font-size: 18px;
-  }
-
-  .detail-card {
-    padding: 16px;
-  }
-
-  .collection-select {
-    flex-direction: column;
-
-    button {
-      width: 100%;
-    }
+  @include mobile {
+    grid-template-columns: 1fr;
   }
 }

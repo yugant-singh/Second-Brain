@@ -25,9 +25,16 @@ export const searchItems = async (req, res) => {
     let results = items
       .filter((item) => item.embedding && item.embedding.length > 0)
       .map((item) => ({
-        ...item._doc,
-        score: cosineSimilarity(queryEmbedding, item.embedding),
-      }))
+  _id: item._id,
+  title: item.title,
+  type: item.type,
+  tags: item.tags,
+  topics: item.topics,
+  content: item.content,
+  sourceUrl: item.sourceUrl,
+  createdAt: item.createdAt,
+  score: cosineSimilarity(queryEmbedding, item.embedding)
+}))
 
     // Sort apply karo
     if (sortBy === "date") {

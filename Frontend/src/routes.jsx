@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useAuth } from "./features/auth/hooks/useAuth.js"
 
 import LandingPage from "./features/landing/pages/LandingPage.jsx"
@@ -16,6 +16,11 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" />
 }
 
+const ItemDetailWrapper = () => {
+  const location = useLocation()
+  return <ItemDetail key={location.pathname} />
+}
+
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -24,7 +29,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/item/:id" element={<ProtectedRoute><ItemDetail /></ProtectedRoute>} />
+        <Route path="/item/:id" element={<ProtectedRoute><ItemDetailWrapper /></ProtectedRoute>} />
         <Route path="/graph" element={<ProtectedRoute><GraphPage /></ProtectedRoute>} />
         <Route path="/search" element={<ProtectedRoute><SearchPage /></ProtectedRoute>} />
         <Route path="/collections/:id" element={<ProtectedRoute><CollectionDetail /></ProtectedRoute>} />
