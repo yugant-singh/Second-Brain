@@ -19,7 +19,7 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://second-brain-ps3j.onrender.com",
-    "chrome-extension://omlhmjibninhndmkbpopjakfjjhhemdi"
+    "chrome-extension://jiafhbmhcngjdoaadcikndnjphlcfflj"
   ],
   credentials: true
 }))

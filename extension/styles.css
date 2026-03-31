@@ -111,3 +111,29 @@ body {
 .hidden {
   display: none;
 }
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  color: rgba(255, 100, 100, 0.7);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.save-btn {
+  flex: 1;
+}

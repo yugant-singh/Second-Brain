@@ -10,17 +10,22 @@
       <p class="subtitle">Save to your universe</p>
 
       <div id="error" class="error hidden"></div>
-      <div id="success" class="success hidden">Saved! ✅</div>
+      <div id="success" class="success hidden"></div>
 
-      <div id="tokenSection">
-        <p class="subtitle">Pehli baar apna JWT token paste karo</p>
+      <!-- Login Section -->
+      <div id="loginSection" class="hidden">
         <div class="form-group">
-          <label>Token</label>
-          <textarea id="tokenInput" placeholder="eyJhbGc..." rows="3"></textarea>
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" />
         </div>
-        <button id="saveTokenBtn" class="save-btn">Save Token</button>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" />
+        </div>
+        <button id="loginBtn" class="save-btn">Login</button>
       </div>
 
+      <!-- Save Section -->
       <div id="formSection" class="hidden">
         <div class="form-group">
           <label>Type</label>
@@ -31,23 +36,22 @@
             <option value="pdf">PDF</option>
           </select>
         </div>
-
         <div class="form-group">
           <label>Title</label>
           <input type="text" id="title" placeholder="Title..." />
         </div>
-
         <div class="form-group">
           <label>Content</label>
           <textarea id="content" placeholder="Content..." rows="3"></textarea>
         </div>
-
         <div class="form-group">
           <label>Source URL</label>
           <input type="text" id="sourceUrl" placeholder="https://..." />
         </div>
-
-        <button id="saveBtn" class="save-btn">Save to MindVault</button>
+        <div class="form-actions">
+          <button id="logoutBtn" class="logout-btn">Logout</button>
+          <button id="saveBtn" class="save-btn">Save to MindVault</button>
+        </div>
       </div>
 
     </div>
