@@ -9,25 +9,32 @@ const GraphPage = () => {
   const svgRef = useRef(null)
   const [loading, setLoading] = useState(true)
   const [selectedNode, setSelectedNode] = useState(null)
+  const [graphData, setGraphData] = useState(null)
 
   useEffect(() => {
-    const fetchAndDraw = async () => {
+    const fetchData = async () => {
       try {
         const res = await getGraphDataAPI()
-        const { nodes, edges } = res.data
-        drawGraph(nodes, edges)
+        setGraphData(res.data)
       } catch (err) {
         console.log(err)
       } finally {
         setLoading(false)
       }
     }
-    fetchAndDraw()
+    fetchData()
   }, [])
 
+  // Alag useEffect — jab loading false ho aur SVG ready ho tab draw karo
+  useEffect(() => {
+    if (!loading && graphData && svgRef.current) {
+      drawGraph(graphData.nodes, graphData.edges)
+    }
+  }, [loading, graphData])
+
   const drawGraph = (nodes, edges) => {
-    const width = svgRef.current.clientWidth
-    const height = svgRef.current.clientHeight
+    const width = svgRef.current.clientWidth || window.innerWidth - 220
+    const height = svgRef.current.clientHeight || 500
 
     d3.select(svgRef.current).selectAll("*").remove()
 
@@ -111,7 +118,7 @@ const GraphPage = () => {
         <main className="graph-main">
           <div className="graph-header">
             <h1>Knowledge Graph</h1>
-            <p>Items ke beech connections dekho</p>
+            <p>Discover connections between your saved items</p>
           </div>
 
           {loading ? (
