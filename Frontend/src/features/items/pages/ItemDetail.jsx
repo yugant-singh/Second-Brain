@@ -76,6 +76,14 @@ const ItemDetail = () => {
           </div>
 
           <div className="detail-card">
+
+            {/* Thumbnail */}
+            {item.thumbnail && (
+              <div className="detail-thumbnail">
+                <img src={item.thumbnail} alt={item.title} />
+              </div>
+            )}
+
             <div className="detail-meta">
               <span className="detail-type">{item.type.toUpperCase()}</span>
               <span className="detail-date">
