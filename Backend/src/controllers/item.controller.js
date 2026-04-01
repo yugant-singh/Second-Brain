@@ -10,22 +10,26 @@ export async function saveItemController(req, res) {
     const aiResult = await generateTags(title, content);
     const embedding = await generateEmbedding(`${title} ${content}`);
 
-    let thumbnail = ""
+   let thumbnail = ""
 
-    if (type === "url" && sourceUrl) {
-      try {
-        const { result } = await ogs({ url: sourceUrl })
-        if (result.ogImage && result.ogImage.length > 0) {
-          thumbnail = result.ogImage[0].url
-        }
-      } catch (err) {
-        console.log("OG fetch failed:", err.message)
+if (type === "url" && sourceUrl) {
+  // YouTube check
+  const ytMatch = sourceUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)
+  if (ytMatch) {
+    thumbnail = `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`
+  } else {
+    try {
+      const { result } = await ogs({ url: sourceUrl })
+      if (result.ogImage && result.ogImage.length > 0) {
+        thumbnail = result.ogImage[0].url
       }
-    } else if (type === "image" && sourceUrl) {
-
-      thumbnail = sourceUrl
+    } catch (err) {
+      console.log("OG fetch failed:", err.message)
     }
-
+  }
+} else if (type === "image" && sourceUrl) {
+  thumbnail = sourceUrl
+}
     const item = await itemModel.create({
       userId: req.user.id,
       type,
