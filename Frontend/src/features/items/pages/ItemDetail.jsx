@@ -76,66 +76,66 @@ const ItemDetail = () => {
           </div>
 
           <div className="detail-card">
-
-            {/* Thumbnail */}
             {item.thumbnail && (
               <div className="detail-thumbnail">
                 <img src={item.thumbnail} alt={item.title} />
               </div>
             )}
 
-            <div className="detail-meta">
-              <span className="detail-type">{item.type.toUpperCase()}</span>
-              <span className="detail-date">
-                {new Date(item.createdAt).toLocaleDateString()}
-              </span>
-            </div>
-
-            <h1 className="detail-title">{item.title}</h1>
-
-            {item.sourceUrl && (
-              <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="detail-url">
-                {item.sourceUrl}
-              </a>
-            )}
-
-            {item.content && (
-              <p className="detail-content">{item.content}</p>
-            )}
-
-            <div className="detail-section">
-              <h3>AI Tags</h3>
-              <div className="detail-tags">
-                {item.tags.map((tag, i) => (
-                  <span key={i} className="detail-tag">{tag}</span>
-                ))}
+            <div className="detail-card-body">
+              <div className="detail-meta">
+                <span className="detail-type">{item.type.toUpperCase()}</span>
+                <span className="detail-date">
+                  {new Date(item.createdAt).toLocaleDateString()}
+                </span>
               </div>
-            </div>
 
-            <div className="detail-section">
-              <h3>Topics</h3>
-              <div className="detail-tags">
-                {item.topics.map((topic, i) => (
-                  <span key={i} className="detail-tag topic">{topic}</span>
-                ))}
-              </div>
-            </div>
+              <h1 className="detail-title">{item.title}</h1>
 
-            <div className="detail-section">
-              <h3>Add to Collection</h3>
-              <div className="collection-select">
-                <select
-                  value={selectedCol}
-                  onChange={(e) => setSelectedCol(e.target.value)}
-                >
-                  <option value="">Select collection</option>
-                  {collections.map((col) => (
-                    <option key={col._id} value={col._id}>{col.name}</option>
+              {item.sourceUrl && (
+                <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="detail-url">
+                  {item.sourceUrl}
+                </a>
+              )}
+
+              {item.content && (
+                <p className="detail-content">{item.content}</p>
+              )}
+
+              <div className="detail-section">
+                <h3>AI Tags</h3>
+                <div className="detail-tags">
+                  {item.tags.map((tag, i) => (
+                    <span key={i} className="detail-tag">{tag}</span>
                   ))}
-                </select>
-                <button onClick={handleAddToCollection}>Add</button>
+                </div>
               </div>
-              {colMsg && <p className="col-msg">{colMsg}</p>}
+
+              <div className="detail-section">
+                <h3>Topics</h3>
+                <div className="detail-tags">
+                  {item.topics.map((topic, i) => (
+                    <span key={i} className="detail-tag topic">{topic}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="detail-section">
+                <h3>Add to Collection</h3>
+                <div className="collection-select">
+                  <select
+                    value={selectedCol}
+                    onChange={(e) => setSelectedCol(e.target.value)}
+                  >
+                    <option value="">Select collection</option>
+                    {collections.map((col) => (
+                      <option key={col._id} value={col._id}>{col.name}</option>
+                    ))}
+                  </select>
+                  <button onClick={handleAddToCollection}>Add</button>
+                </div>
+                {colMsg && <p className="col-msg">{colMsg}</p>}
+              </div>
             </div>
           </div>
 
