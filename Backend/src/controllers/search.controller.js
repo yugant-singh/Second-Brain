@@ -14,7 +14,6 @@ export const searchItems = async (req, res) => {
 
     const queryEmbedding = await generateEmbedding(query);
 
-    // Type filter apply karo
     const filter = { userId: req.user.id };
     if (type && type !== "all") {
       filter.type = type;
@@ -25,21 +24,21 @@ export const searchItems = async (req, res) => {
     let results = items
       .filter((item) => item.embedding && item.embedding.length > 0)
       .map((item) => ({
-  _id: item._id,
-  title: item.title,
-  type: item.type,
-  tags: item.tags,
-  topics: item.topics,
-  content: item.content,
-  sourceUrl: item.sourceUrl,
-  createdAt: item.createdAt,
-  score: cosineSimilarity(queryEmbedding, item.embedding)
-}))
+        _id: item._id,
+        title: item.title,
+        type: item.type,
+        tags: item.tags,
+        topics: item.topics,
+        content: item.content,
+        sourceUrl: item.sourceUrl,
+        thumbnail: item.thumbnail,
+        createdAt: item.createdAt,
+        score: cosineSimilarity(queryEmbedding, item.embedding)
+      }))
+      .filter((item) => item.score > 0.3)  // ✅ dono mein apply hoga
 
-    // Sort apply karo
     if (sortBy === "date") {
       results = results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      results = results.filter((item) => item.score > 0.3)
     } else {
       results = results.sort((a, b) => b.score - a.score)
     }
