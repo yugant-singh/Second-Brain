@@ -133,6 +133,7 @@ export async function getItemById(req, res) {
         topics: i.topics,
         content: i.content,
         sourceUrl: i.sourceUrl,
+         thumbnail: i.thumbnail,
         createdAt: i.createdAt,
         score: cosineSimilarity(item.embedding, i.embedding)
       }))
