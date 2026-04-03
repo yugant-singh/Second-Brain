@@ -35,7 +35,7 @@ const CollectionDetail = () => {
 
   const handleDelete = async () => {
     await deleteCollection(id)
-    navigate("/")
+    navigate("/dashboard")
   }
 
   return (

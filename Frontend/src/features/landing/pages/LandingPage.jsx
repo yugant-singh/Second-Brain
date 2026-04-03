@@ -151,6 +151,41 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <section className="extension-section">
+        <div className="extension-left">
+          <div className="hero-badge">🌐 Browser Extension</div>
+          <h2>Save any webpage<br />in one click</h2>
+          <p>Install our Chrome extension — visit any webpage, click the icon, and it's saved to your knowledge universe instantly.</p>
+
+          <a
+            href="https://raw.githubusercontent.com/yugant-singh/Second-Brain/main/extension.zip"
+            className="btn-primary btn-lg"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+          ></a>
+        </div>
+
+        <div className="extension-right">
+          <div className="ext-step">
+            <span className="ext-step-num">1</span>
+            <p>Download and extract the extension zip file</p>
+          </div>
+          <div className="ext-step">
+            <span className="ext-step-num">2</span>
+            <p>Open <code>chrome://extensions</code> and enable Developer Mode</p>
+          </div>
+          <div className="ext-step">
+            <span className="ext-step-num">3</span>
+            <p>Click "Load Unpacked" and select the extracted folder</p>
+          </div>
+          <div className="ext-step">
+            <span className="ext-step-num">4</span>
+            <p>Login with your MindVault account and start saving!</p>
+          </div>
+        </div>
+      </section>
+
       <section className="features">
         <h2 className="features-title">Everything in one place</h2>
         <p className="features-subtitle">Save anything — AI makes it smart</p>
@@ -174,6 +209,7 @@ const LandingPage = () => {
 
     </div>
   )
+
 }
 
 export default LandingPage
