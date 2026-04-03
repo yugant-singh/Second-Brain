@@ -15,14 +15,22 @@ const __dirname = path.dirname(__filename)
 const app = express()
 
 app.use(express.json())
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://second-brain-ps3j.onrender.com",
-    "chrome-extension://jiafhbmhcngjdoaadcikndnjphlcfflj"
-  ],
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://second-brain-ps3j.onrender.com",
+    ]
+    if (!origin || allowedOrigins.includes(origin) || origin.startsWith("chrome-extension://")) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
   credentials: true
 }))
+
 app.use(cookieParser())
 
 app.use('/api/auth', authRouter)
@@ -31,10 +39,8 @@ app.use('/api/collections', collectionRouter)
 app.use("/api/search", searchRouter)
 app.use("/api/graph", graphRouter)
 
-// Static files
 app.use(express.static(path.join(__dirname, '../public')))
 
-// Refresh fix — LAST mein
 app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'))
 })

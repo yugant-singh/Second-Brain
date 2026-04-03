@@ -163,7 +163,7 @@ const LandingPage = () => {
             download
             target="_blank"
             rel="noopener noreferrer"
-          ></a>
+          >Download Mindvault Extension</a>
         </div>
 
         <div className="extension-right">
