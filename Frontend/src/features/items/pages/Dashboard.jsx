@@ -3,6 +3,7 @@ import Navbar from "../../shared/components/Navbar/Navbar.jsx"
 import Sidebar from "../../shared/components/Sidebar/Sidebar.jsx"
 import ItemCard from "../components/ItemCard/ItemCard.jsx"
 import SaveItemModal from "../components/SaveItemModal/SaveItemModal.jsx"
+import Loader from "../../shared/components/Loader/Loader.jsx"
 import { useItems } from "../hooks/useItems.js"
 import "./Dashboard.scss"
 
@@ -51,7 +52,7 @@ const Dashboard = () => {
           <div className="section-label">Recent Saves</div>
 
           {loading ? (
-            <div className="dashboard-loading">Loading...</div>
+            <Loader />
           ) : items.length === 0 ? (
             <div className="dashboard-empty">
               <p>No items yet — save your first item! 🚀</p>

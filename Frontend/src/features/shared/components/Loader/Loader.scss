@@ -1,0 +1,77 @@
+@use '../../../shared/styles/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.loader-wrapper {
+  @include flex-center;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px;
+
+  &.full-screen {
+    position: fixed;
+    inset: 0;
+    background: $bg-primary;
+    z-index: 999;
+  }
+}
+
+.loader-orbit {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  @include flex-center;
+}
+
+.loader-core {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: $cyan;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: $cyan;
+  border-right-color: rgba(0, 212, 255, 0.3);
+  animation: spin 1s linear infinite;
+}
+
+.loader-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $cyan;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: spin 1s linear infinite;
+  transform-origin: 50% 24px;
+}
+
+.loader-text {
+  font-size: 12px;
+  color: $text-muted;
+  letter-spacing: 1px;
+  animation: fade 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}

@@ -9,10 +9,11 @@ import ItemDetail from "./features/items/pages/ItemDetail.jsx"
 import GraphPage from "./features/graph/pages/GraphPage.jsx"
 import SearchPage from "./features/search/pages/SearchPage.jsx"
 import CollectionDetail from "./features/collections/pages/CollectionDetail.jsx"
+import Loader from '../src/features/shared/components/Loader/Loader.jsx'
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
-  if (loading) return <div>Loading...</div>
+  if (loading) return <Loader fullScreen />
   return user ? children : <Navigate to="/login" />
 }
 

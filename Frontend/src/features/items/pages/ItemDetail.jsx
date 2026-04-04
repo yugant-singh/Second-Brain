@@ -5,6 +5,7 @@ import Sidebar from "../../shared/components/Sidebar/Sidebar.jsx"
 import ItemCard from "../components/ItemCard/ItemCard.jsx"
 import { useItems } from "../hooks/useItems.js"
 import { useCollections } from "../../collections/hooks/useCollections.js"
+import Loader from '../../shared/components/Loader/Loader.jsx'
 import "./ItemDetail.scss"
 
 const ItemDetail = () => {
@@ -46,11 +47,11 @@ const ItemDetail = () => {
   }
 
   if (loading) return (
-    <div className="detail-page">
-      <Navbar />
-      <div className="detail-loading">Loading...</div>
-    </div>
-  )
+  <div className="detail-page">
+    <Navbar />
+    <Loader fullScreen />
+  </div>
+)
 
   if (!item) return (
     <div className="detail-page">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import toast from "react-hot-toast"
 import {
   getCollectionsAPI,
   createCollectionAPI,
@@ -30,8 +31,10 @@ export function useCollections() {
     try {
       const res = await createCollectionAPI(data)
       setCollections((prev) => [res.data.collection, ...prev])
+      toast.success("Collection created! 📁")
       return { success: true }
     } catch (err) {
+      toast.error("Failed to create collection!")
       return { error: err.response?.data?.message || "Something went wrong" }
     }
   }
@@ -40,8 +43,10 @@ export function useCollections() {
     try {
       await deleteCollectionAPI(id)
       setCollections((prev) => prev.filter((col) => col._id !== id))
+      toast.success("Collection deleted!")
       return { success: true }
     } catch (err) {
+      toast.error("Failed to delete collection!")
       return { error: err.response?.data?.message || "Something went wrong" }
     }
   }
@@ -49,8 +54,10 @@ export function useCollections() {
   const addItemToCollection = async (collectionId, itemId) => {
     try {
       await addItemToCollectionAPI(collectionId, itemId)
+      toast.success("Item added to collection! ✅")
       return { success: true }
     } catch (err) {
+      toast.error("Failed to add item!")
       return { error: err.response?.data?.message || "Something went wrong" }
     }
   }

@@ -3,7 +3,7 @@
 > Your Personal Knowledge Universe — Save anything from the internet, AI automatically organizes, tags, and resurfaces it for you.
 
 **Live Demo:** [second-brain-ps3j.onrender.com](https://second-brain-ps3j.onrender.com)
-
+** Live video - https://www.youtube.com/watch?v=-WDwys7rSW4
 ---
 
 ## What is MindVault?
